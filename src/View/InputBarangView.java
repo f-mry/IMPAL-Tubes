@@ -119,9 +119,10 @@ public class InputBarangView extends javax.swing.JFrame {
         cari_form = new javax.swing.JTextField();
         cariBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        cariTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel1.setFont(new java.awt.Font("Levenim MT", 1, 18)); // NOI18N
         jLabel1.setText("Penginputan Barang");
@@ -148,13 +149,13 @@ public class InputBarangView extends javax.swing.JFrame {
 
         cariBtn.setText("cari");
 
-        jTable2.setModel(tabmodel);
-        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+        cariTable.setModel(tabmodel);
+        cariTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jTable2MousePressed(evt);
+                cariTableMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable2);
+        jScrollPane1.setViewportView(cariTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -239,12 +240,12 @@ public class InputBarangView extends javax.swing.JFrame {
         tanggalPesan_form.setText(dateform.format(date));
     }//GEN-LAST:event_tanggalPesan_formMouseEntered
 
-    private void jTable2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MousePressed
-        harga_form.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 3).toString());
-        IDBarang_form.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString());
-        namaBarang_form.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 1).toString());
+    private void cariTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cariTableMousePressed
+        harga_form.setText(cariTable.getValueAt(cariTable.getSelectedRow(), 3).toString());
+        IDBarang_form.setText(cariTable.getValueAt(cariTable.getSelectedRow(), 0).toString());
+        namaBarang_form.setText(cariTable.getValueAt(cariTable.getSelectedRow(), 1).toString());
         
-    }//GEN-LAST:event_jTable2MousePressed
+    }//GEN-LAST:event_cariTableMousePressed
 
     /**
      * @param args the command line arguments
@@ -288,6 +289,7 @@ public class InputBarangView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField IDBarang_form;
     private javax.swing.JButton cariBtn;
+    private javax.swing.JTable cariTable;
     private javax.swing.JTextField cari_form;
     private javax.swing.JTextField harga_form;
     private javax.swing.JLabel jLabel1;
@@ -299,7 +301,6 @@ public class InputBarangView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jumlah_form;
     private javax.swing.JTextField namaBarang_form;
     private javax.swing.JButton tambahBtn;

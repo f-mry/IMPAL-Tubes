@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jdk.nashorn.internal.runtime.ConsString;
 
 /**
  *
@@ -39,7 +40,7 @@ public class InputBarangController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (view.getCari_form()==null){
+            if (view.getCari_form()==""){
                 model.initBarang();
                 ResultSet rs = model.getBarang();
                 view.updateTabel(rs);
@@ -52,13 +53,18 @@ public class InputBarangController {
         @Override
         public void actionPerformed(ActionEvent arg0) {
             String nama = view.getCari_form();
-            System.out.println(nama);  
             ResultSet rs;
-            if(nama!=""){
+            if(!"".equals(view.getCari_form())){
                 model.cariBarang(nama);
                 rs = model.getBarang();
                 view.updateTabel(rs);
             }
+            else{
+                model.initBarang();
+                rs = model.getBarang();
+                view.updateTabel(rs);
+            }
+                
             
             
         }
