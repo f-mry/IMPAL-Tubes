@@ -22,14 +22,22 @@ public class PenjualanBarangView extends javax.swing.JFrame {
      * Creates new form Penjualan_Barang
      */
     public PenjualanBarangView() {
-        tabModelKeranjang = new DefaultTableModel(new Object[]{"Nama Barang","Jumlah","Harga","Total"},3);
-        tabModelCari = new DefaultTableModel(new Object[]{"ID Barang","Nama Barang","Jumlah","Harga"},5);
+        tabModelKeranjang = new DefaultTableModel(new Object[]{"ID Barang","Nama Barang","Jumlah","Harga","Total"},0);
+        tabModelCari = new DefaultTableModel(new Object[]{"ID Barang","Nama Barang","Jumlah","Harga"},0);
         initComponents();
         
     }
     
     public void Row(){
         
+    }
+    
+    public String getKodeForm(){
+        return kodeBarangForm.getText();
+    }
+    
+    public String getTotalForm(){
+        return totalForm.getText();
     }
 
     public String getCariForm() {
@@ -52,8 +60,16 @@ public class PenjualanBarangView extends javax.swing.JFrame {
         return namaBarangForm.getText();
     }
     
-    public void setTotalForm(int total){
-        totalForm.setText(Integer.toString(total));
+    public void setTotalForm(){
+        int i = 0;
+        int total = 0;
+        while (i<tabModelKeranjang.getRowCount()){
+            total = total + Integer.parseInt(tabModelKeranjang.getValueAt(i, 4).toString());
+            System.out.println(total);
+            i++;
+        }
+        totalForm.setText("Rp "+Integer.toString(total));
+        
     }
     
     public void cariListener(ActionListener cariListen){
@@ -86,23 +102,36 @@ public class PenjualanBarangView extends javax.swing.JFrame {
                 
                 int count = tabModelCari.getRowCount()+1;
                 
-                tabModelCari.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)});         
+                tabModelCari.addRow(new Object[]{rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)});         
                 }       
                 rs.beforeFirst();
             
         } catch (Exception ex) {
-            //this.Message("Barang Tidak Ada");
+            this.message("Barang Tidak Ada");
         }  
     }
     
-    public void updateTableKeranjang(String nama,int jumlah,int harga){
+    public void updateTableKeranjang(String id,String nama,int jumlah,int harga){
         int total = jumlah*harga;
-        tabModelKeranjang.addRow(new Object[]{nama,jumlah,harga,total});
+        tabModelKeranjang.addRow(new Object[]{id,nama,jumlah,harga,total});
     }
     
     public void message(String s){
         JOptionPane.showMessageDialog(this, s);
     }
+    
+    public int nBarang(){
+        return tabModelKeranjang.getRowCount();
+    }
+    
+    public String[] kernajangRow(int i){
+        System.out.println(tabModelKeranjang.getValueAt(i, 1).toString());
+        System.out.println(tabModelKeranjang.getRowCount());
+        String[] value = {tabModelKeranjang.getValueAt(i, 0).toString(),tabModelKeranjang.getValueAt(i, 1).toString(),tabModelKeranjang.getValueAt(i, 2).toString(),tabModelKeranjang.getValueAt(i, 3).toString(),tabModelKeranjang.getValueAt(i, 4).toString()};
+        return value;
+    }
+    
+    
     
     
     
@@ -149,32 +178,44 @@ public class PenjualanBarangView extends javax.swing.JFrame {
         batalBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Levenim MT", 1, 18)); // NOI18N
         jLabel1.setText("Penjualan Barang");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(244, 0, -1, -1));
 
-        totalForm.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
-        totalForm.setText("tes");
+        totalForm.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        totalForm.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        totalForm.setText("Rp.");
+        getContentPane().add(totalForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 367, 171, 83));
 
         jLabel4.setText("Kode Barang");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 69, -1, -1));
 
         jLabel5.setText("Nama Barang");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 90, -1, -1));
 
         jLabel6.setText("Harga");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 117, -1, -1));
 
         jLabel7.setText("Jumlah");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 146, -1, -1));
 
-        namaBarangForm.setText("jTextField3");
-
-        hargaForm.setText("jTextField4");
-
-        kodeBarangForm.setText("jTextField5");
-
-        jumlahForm.setText("jTextField6");
+        namaBarangForm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                namaBarangFormActionPerformed(evt);
+            }
+        });
+        getContentPane().add(namaBarangForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(237, 90, 70, -1));
+        getContentPane().add(hargaForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(237, 115, 70, -1));
+        getContentPane().add(kodeBarangForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(237, 65, 70, -1));
+        getContentPane().add(jumlahForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(237, 144, 70, -1));
 
         tambahBtn.setText("Tambah");
+        getContentPane().add(tambahBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(217, 169, -1, -1));
 
         jLabel3.setText("Total Harga :");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(326, 398, 100, 23));
 
         cariTable.setModel(tabModelCari);
         cariTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -184,122 +225,39 @@ public class PenjualanBarangView extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(cariTable);
 
-        cariForm.setText("jTextField7");
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(325, 65, 383, 119));
+        getContentPane().add(jScrollBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 0, 0));
+        getContentPane().add(cariForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(424, 40, 91, -1));
 
         cariBtn.setText("cari");
+        getContentPane().add(cariBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(521, 40, -1, 19));
 
         jLabel8.setText("cari barang");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(325, 44, -1, -1));
 
         totalTable.setModel(tabModelKeranjang);
         jScrollPane3.setViewportView(totalTable);
 
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 200, 657, 149));
+
         hapusBtn.setText("Hapus");
+        hapusBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hapusBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(hapusBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 397, -1, -1));
 
         bayarBtn.setText("Bayar");
+        getContentPane().add(bayarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(633, 395, -1, -1));
 
         batalBtn.setText("Batal");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(hapusBtn)
-                                .addGap(48, 48, 48)
-                                .addComponent(batalBtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(totalForm, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(bayarBtn))
-                            .addComponent(jScrollPane3))
-                        .addGap(65, 65, 65))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(193, 193, 193)
-                        .addComponent(jLabel1)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tambahBtn)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel6))
-                                .addGap(91, 91, 91)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(hargaForm)
-                                    .addComponent(jumlahForm)
-                                    .addComponent(namaBarangForm)
-                                    .addComponent(kodeBarangForm))))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cariForm, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cariBtn))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
-                                .addGap(65, 65, 65))))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel8)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cariForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cariBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(kodeBarangForm, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(namaBarangForm, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(hargaForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jumlahForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tambahBtn))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(totalForm, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(hapusBtn)
-                                    .addComponent(batalBtn))
-                                .addGap(28, 28, 28))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(bayarBtn)))
-                .addContainerGap(74, Short.MAX_VALUE))
-        );
+        batalBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                batalBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(batalBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 397, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -307,10 +265,26 @@ public class PenjualanBarangView extends javax.swing.JFrame {
     private void cariTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cariTableMousePressed
         // TODO add your handling code here:
         int row = cariTable.getSelectedRow();
-        kodeBarangForm.setText(cariTable.getValueAt(row, 1).toString());
-        namaBarangForm.setText(cariTable.getValueAt(row, 2).toString());
-        hargaForm.setText(cariTable.getValueAt(row, 4).toString());
+        kodeBarangForm.setText(cariTable.getValueAt(row, 0).toString());
+        namaBarangForm.setText(cariTable.getValueAt(row, 1).toString());
+        hargaForm.setText(cariTable.getValueAt(row, 3).toString());
     }//GEN-LAST:event_cariTableMousePressed
+
+    private void hapusBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusBtnActionPerformed
+        // TODO add your handling code here:
+        tabModelKeranjang.removeRow(totalTable.getSelectedRow());
+        setTotalForm();
+    }//GEN-LAST:event_hapusBtnActionPerformed
+
+    private void batalBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batalBtnActionPerformed
+        // TODO add your handling code here:
+        tabModelKeranjang.setRowCount(0);
+        totalForm.setText("Rp.");
+    }//GEN-LAST:event_batalBtnActionPerformed
+
+    private void namaBarangFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaBarangFormActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_namaBarangFormActionPerformed
 
     /**
      * @param args the command line arguments

@@ -32,6 +32,10 @@ public class LoginController {
         switch (jabatan){
             case "gudang":
                 InputBarangController gudang = new InputBarangController();
+                break;
+            case "kasir":
+                PenjualanBarangController kasir = new PenjualanBarangController();
+                break;
                 
         }
     }
