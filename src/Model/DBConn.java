@@ -33,6 +33,7 @@ public class DBConn {
     public ResultSet getData(String query){
         try {
             rs = st.executeQuery(query);
+            System.out.println(query);
             rs.next();
             System.out.println("Get data berhasil");
             

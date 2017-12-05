@@ -5,15 +5,18 @@
         <group>
             <file>file:/home/farhanm/Documents/Kuliah/IMPAL/Tubes2_Impal-git/.git/config</file>
             <file>file:/home/farhanm/Documents/Kuliah/IMPAL/Tubes2_Impal-git/src/Controller/LoginController.java</file>
-            <file>file:/home/farhanm/Documents/Kuliah/IMPAL/Tubes2_Impal-git/src/View/PenjualanBarangView.java</file>
             <file>file:/home/farhanm/Documents/Kuliah/IMPAL/Tubes2_Impal-git/src/View/Persediaan_Barang.java</file>
-            <file>file:/home/farhanm/Documents/Kuliah/IMPAL/Tubes2_Impal-git/src/Model/InputBarangModel.java</file>
             <file>file:/home/farhanm/Documents/Kuliah/IMPAL/Tubes2_Impal-git/src/View/InputBarangView.java</file>
-            <file>file:/home/farhanm/Documents/Kuliah/IMPAL/Tubes2_Impal-git/src/Controller/PenjualanBarangController.java</file>
+            <file>file:/home/farhanm/Documents/Kuliah/IMPAL/Tubes2_Impal-git/src/View/EditUserView.java</file>
             <file>file:/home/farhanm/Documents/Kuliah/IMPAL/Tubes2_Impal-git/src/Model/LoginModel.java</file>
-            <file>file:/home/farhanm/Documents/Kuliah/IMPAL/Tubes2_Impal-git/src/Controller/InputBarangController.java</file>
             <file>file:/home/farhanm/Documents/Kuliah/IMPAL/Tubes2_Impal-git/src/View/LoginView.java</file>
             <file>file:/home/farhanm/Documents/Kuliah/IMPAL/Tubes2_Impal-git/src/Model/PenjualanBarangModel.java</file>
+            <file>file:/home/farhanm/Documents/Kuliah/IMPAL/Tubes2_Impal-git/src/View/PenjualanBarangView.java</file>
+            <file>file:/home/farhanm/Documents/Kuliah/IMPAL/Tubes2_Impal-git/src/Model/DBConn.java</file>
+            <file>file:/home/farhanm/Documents/Kuliah/IMPAL/Tubes2_Impal-git/src/Model/InputBarangModel.java</file>
+            <file>file:/home/farhanm/Documents/Kuliah/IMPAL/Tubes2_Impal-git/src/Controller/PenjualanBarangController.java</file>
+            <file>file:/home/farhanm/Documents/Kuliah/IMPAL/Tubes2_Impal-git/src/Controller/InputBarangController.java</file>
+            <file>file:/home/farhanm/Documents/Kuliah/IMPAL/Tubes2_Impal-git/src/tubes2_impal/Tubes2_Impal.java</file>
         </group>
     </open-files>
 </project-private>
